@@ -1,4 +1,4 @@
-# 🎄 Ma Liste de Noël 2024
+# 🎄 Ma Liste de Noël 2025
 
 Un site web moderne et élégant pour afficher votre liste de cadeaux de Noël avec un design professionnel, des animations subtiles et une expérience utilisateur optimale.
 
@@ -6,21 +6,23 @@ Un site web moderne et élégant pour afficher votre liste de cadeaux de Noël a
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/HeisenPear/liste-no-l-2025)
 
 ## ✨ Fonctionnalités
 
 - 🎨 **Design moderne** avec effet glassmorphism
-- 🌙 **Mode sombre/clair** avec toggle élégant
+- 🌙 **Mode sombre uniquement** pour une ambiance élégante
 - 🔍 **Recherche en temps réel** pour trouver rapidement un produit
 - 🏷️ **Filtres par catégorie** dynamiques
 - 📱 **Responsive design** (mobile-first)
 - ❄️ **Effet neige** subtil et performant
 - ⏱️ **Compteur** jusqu'à Noël
-- 🎯 **Badges de priorité** (haute/moyenne/basse)
+- 🎯 **Badges de priorité** (haute/moyenne/basse/cadeaux commun)
 - 🖼️ **Images avec effet zoom** au survol
 - ⚡ **Performance optimisée** (vanilla JavaScript, lazy loading)
 - ♿ **Accessible** (ARIA labels, navigation clavier)
 - 🎭 **Animations fluides** avec CSS3
+- 🚀 **Déploiement automatique** avec Vercel
 
 ## 📁 Structure du projet
 
@@ -178,24 +180,35 @@ Pour désactiver complètement l'effet neige, retirez cette ligne dans `index.ht
 
 ## 🌐 Déploiement
 
+### Vercel (Recommandé - gratuit avec déploiements automatiques)
+
+**Déploiement en un clic :**
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/HeisenPear/liste-no-l-2025)
+
+**Ou manuellement :**
+
+1. Créez un compte sur [Vercel](https://vercel.com)
+2. Connectez votre compte GitHub
+3. Importez votre repository `liste-no-l-2025`
+4. Vercel détectera automatiquement la configuration
+5. Cliquez sur "Deploy"
+
+**✨ Déploiements automatiques activés :**
+- Chaque `git push` sur la branche `main` déclenche un nouveau déploiement
+- Prévisualisation automatique pour chaque Pull Request
+- URL de production : `https://votre-projet.vercel.app`
+
 ### GitHub Pages (gratuit)
 
-1. Créez un repository GitHub
-2. Uploadez tous les fichiers
-3. Allez dans Settings > Pages
-4. Sélectionnez la branche `main`
-5. Votre site sera accessible à `https://votre-nom.github.io/nom-du-repo/`
+1. Allez dans Settings > Pages de votre repository
+2. Sélectionnez la branche `main`
+3. Votre site sera accessible à `https://heisenpear.github.io/liste-no-l-2025/`
 
 ### Netlify (gratuit)
 
 1. Glissez-déposez votre dossier sur [Netlify Drop](https://app.netlify.com/drop)
-2. Votre site est en ligne en quelques secondes !
-
-### Vercel (gratuit)
-
-1. Installez [Vercel CLI](https://vercel.com/download)
-2. Lancez `vercel` dans votre dossier
-3. Suivez les instructions
+2. Ou connectez votre repository GitHub pour des déploiements automatiques
 
 ## 🔧 Personnalisation avancée
 
