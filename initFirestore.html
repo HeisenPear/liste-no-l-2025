@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initialisation Firestore - Liste de Noël</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            color: #856404;
+        }
+
+        .warning strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info {
+            background: #d1ecf1;
+            border: 2px solid #17a2b8;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            color: #0c5460;
+        }
+
+        .steps {
+            margin: 2rem 0;
+        }
+
+        .steps ol {
+            padding-left: 1.5rem;
+        }
+
+        .steps li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .console {
+            background: #1a202c;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            color: #68d391;
+            min-height: 120px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .console.show {
+            display: block;
+        }
+
+        .console-line {
+            margin-bottom: 0.25rem;
+        }
+
+        code {
+            background: #f7fafc;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            color: #e53e3e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 Initialisation Firestore</h1>
+
+        <div class="warning">
+            <strong>⚠️ ATTENTION</strong>
+            N'exécutez ce script qu'UNE SEULE FOIS ! Il va créer tous les produits dans Firestore depuis votre config.json.
+        </div>
+
+        <div class="info">
+            <strong>ℹ️ Prérequis</strong>
+            Assurez-vous d'avoir configuré vos credentials Firebase dans <code>scripts/firebaseConfig.js</code> avant de continuer.
+        </div>
+
+        <div class="steps">
+            <h3>Étapes :</h3>
+            <ol>
+                <li>Créez un projet sur <a href="https://console.firebase.google.com/" target="_blank">Firebase Console</a></li>
+                <li>Activez Firestore Database (mode production ou test)</li>
+                <li>Copiez vos credentials dans <code>scripts/firebaseConfig.js</code></li>
+                <li>Ouvrez la console du navigateur (F12)</li>
+                <li>Cliquez sur le bouton ci-dessous</li>
+                <li>Vérifiez les logs dans la console et dans Firestore Console</li>
+            </ol>
+        </div>
+
+        <button class="btn" id="initBtn">Initialiser Firestore</button>
+
+        <div class="console" id="console">
+            <div class="console-line">📡 Prêt à initialiser Firestore...</div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { db } from './scripts/firebaseConfig.js';
+        import { collection, doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        const consoleEl = document.getElementById('console');
+        const btnEl = document.getElementById('initBtn');
+
+        function addLog(message, type = 'info') {
+            consoleEl.classList.add('show');
+            const line = document.createElement('div');
+            line.className = 'console-line';
+            line.textContent = message;
+            if (type === 'error') {
+                line.style.color = '#fc8181';
+            } else if (type === 'success') {
+                line.style.color = '#68d391';
+            }
+            consoleEl.appendChild(line);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+
+        async function populateFirestore() {
+            try {
+                btnEl.disabled = true;
+                btnEl.textContent = 'Initialisation en cours...';
+
+                addLog('📦 Chargement de config.json...', 'info');
+
+                const response = await fetch('./config.json');
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP: ${response.status}`);
+                }
+
+                const config = await response.json();
+                addLog(`✅ ${config.products.length} produits trouvés dans config.json`, 'success');
+
+                addLog('🔥 Initialisation de Firestore...', 'info');
+
+                for (const product of config.products) {
+                    const productData = {
+                        ...product,
+                        purchased: false,
+                        purchasedAt: null
+                    };
+
+                    await setDoc(doc(db, 'products', product.id.toString()), productData);
+                    addLog(`✅ Produit ${product.id} (${product.name}) ajouté`, 'success');
+                }
+
+                addLog('🎉 Firestore initialisé avec succès !', 'success');
+                addLog(`📊 ${config.products.length} produits ajoutés à la base de données`, 'success');
+
+                btnEl.textContent = '✅ Initialisation terminée';
+                btnEl.style.background = '#48bb78';
+
+                alert(`✅ Firestore initialisé avec succès !\n\n${config.products.length} produits ont été ajoutés.`);
+
+            } catch (error) {
+                addLog(`❌ Erreur: ${error.message}`, 'error');
+                console.error('Erreur complète:', error);
+
+                btnEl.disabled = false;
+                btnEl.textContent = 'Réessayer';
+                btnEl.style.background = '#f56565';
+
+                alert(`❌ Erreur: ${error.message}\n\nVérifiez la console pour plus de détails.`);
+            }
+        }
+
+        btnEl.addEventListener('click', populateFirestore);
+    </script>
+</body>
+</html>

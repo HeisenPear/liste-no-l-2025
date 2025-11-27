@@ -3,6 +3,9 @@
  * Handles product loading, filtering, search, countdown, and dark mode
  */
 
+// Import Firebase functions
+import { listenToProducts, markProductAsPurchased, unmarkProduct, isFirebaseConfigured } from './firebase.js';
+
 // ===================================
 // Global State
 // ===================================
@@ -10,6 +13,8 @@ let products = [];
 let filteredProducts = [];
 let currentCategory = 'all';
 let searchQuery = '';
+let useFirebase = false;
+let unsubscribeFirestore = null;
 
 // ===================================
 // DOM Elements
@@ -34,21 +39,53 @@ const minutesElement = document.getElementById('minutes');
 // ===================================
 async function init() {
     try {
-        // Load configuration
+        // Load configuration for site content
         const config = await loadConfig();
 
         // Set site content
         setSiteContent(config);
 
-        // Store products
-        products = config.products;
-        filteredProducts = products;
+        // Check if Firebase is configured
+        useFirebase = isFirebaseConfigured();
 
-        // Build filters
-        buildFilters();
+        if (useFirebase) {
+            console.log('🔥 Mode Firebase activé - Synchronisation temps réel');
 
-        // Render products
-        renderProducts();
+            // Listen to Firestore for real-time updates
+            unsubscribeFirestore = listenToProducts((updatedProducts, error) => {
+                if (error) {
+                    // Fallback to config.json if Firebase fails
+                    console.warn('⚠️ Firebase non disponible, utilisation de config.json');
+                    useFirebase = false;
+                    products = config.products;
+                    filteredProducts = products;
+                    buildFilters();
+                    renderProducts();
+                } else {
+                    // Use products from Firebase
+                    products = updatedProducts;
+                    filteredProducts = products;
+
+                    // Build filters on first load
+                    if (!filtersContainer.querySelector('[data-category]').nextSibling) {
+                        buildFilters();
+                    }
+
+                    applyFilters();
+                }
+            });
+        } else {
+            console.log('📦 Mode local - Utilisation de config.json');
+            // Use products from config.json
+            products = config.products;
+            filteredProducts = products;
+
+            // Build filters
+            buildFilters();
+
+            // Render products
+            renderProducts();
+        }
 
         // Start countdown
         updateCountdown();
@@ -217,9 +254,14 @@ function renderProducts() {
 
     productsGrid.innerHTML = filteredProducts.map(product => {
         const priorityClass = product.priority ? product.priority.toLowerCase().replace(/\s+/g, '-') : '';
+        const isPurchased = product.purchased || false;
+
         return `
-        <article class="product-card">
-            ${product.priority ? `<span class="priority-badge ${priorityClass}">${product.priority}</span>` : ''}
+        <article class="product-card ${isPurchased ? 'purchased' : ''}" data-product-id="${product.id}">
+            ${isPurchased
+                ? '<div class="purchased-badge">🎁 DÉJÀ ACHETÉ</div>'
+                : (product.priority ? `<span class="priority-badge ${priorityClass}">${product.priority}</span>` : '')
+            }
             <div class="product-image">
                 ${product.image
                     ? `<img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'product-image-placeholder\\'>${getCategoryEmoji(product.category)}</div>'">`
@@ -240,12 +282,72 @@ function renderProducts() {
                         </svg>
                     </a>
                 </div>
+                ${useFirebase ? `
+                <div class="product-actions">
+                    ${isPurchased
+                        ? `<button class="unmark-purchased-btn" data-id="${product.id}">Annuler</button>`
+                        : `<button class="mark-purchased-btn" data-id="${product.id}">Marquer comme acheté</button>`
+                    }
+                </div>
+                ` : ''}
             </div>
         </article>
     `}).join('');
 
+    // Add event listeners for purchase buttons
+    if (useFirebase) {
+        attachPurchaseListeners();
+    }
+
     // Trigger animation for new cards
     animateCards();
+}
+
+/**
+ * Attach event listeners to purchase buttons
+ */
+function attachPurchaseListeners() {
+    // Mark as purchased buttons
+    document.querySelectorAll('.mark-purchased-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const button = e.currentTarget;
+            const productId = button.dataset.id;
+
+            button.disabled = true;
+            button.textContent = 'Marquage...';
+
+            try {
+                await markProductAsPurchased(productId);
+                console.log(`✅ Produit ${productId} marqué comme acheté`);
+            } catch (error) {
+                console.error('❌ Erreur:', error);
+                alert('Une erreur est survenue. Veuillez réessayer.');
+                button.disabled = false;
+                button.textContent = 'Marquer comme acheté';
+            }
+        });
+    });
+
+    // Unmark purchased buttons
+    document.querySelectorAll('.unmark-purchased-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const button = e.currentTarget;
+            const productId = button.dataset.id;
+
+            button.disabled = true;
+            button.textContent = 'Annulation...';
+
+            try {
+                await unmarkProduct(productId);
+                console.log(`🔄 Marquage annulé pour le produit ${productId}`);
+            } catch (error) {
+                console.error('❌ Erreur:', error);
+                alert('Une erreur est survenue. Veuillez réessayer.');
+                button.disabled = false;
+                button.textContent = 'Annuler';
+            }
+        });
+    });
 }
 
 function getCategoryEmoji(category) {

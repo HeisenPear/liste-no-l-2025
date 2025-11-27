@@ -1,0 +1,24 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Règles pour la collection "products"
+    match /products/{productId} {
+
+      // Tout le monde peut lire les produits
+      allow read: if true;
+
+      // Tout le monde peut mettre à jour UNIQUEMENT les champs purchased et purchasedAt
+      allow update: if request.resource.data.diff(resource.data).affectedKeys()
+                      .hasOnly(['purchased', 'purchasedAt'])
+                    && request.resource.data.purchased is bool
+                    && (request.resource.data.purchasedAt == null
+                        || request.resource.data.purchasedAt is timestamp);
+
+      // Personne ne peut créer ou supprimer des produits
+      // (seulement via initFirestore.html ou Firebase Console)
+      allow create: if false;
+      allow delete: if false;
+    }
+  }
+}

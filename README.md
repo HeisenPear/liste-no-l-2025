@@ -23,6 +23,9 @@ Un site web moderne et élégant pour afficher votre liste de cadeaux de Noël a
 - ♿ **Accessible** (ARIA labels, navigation clavier)
 - 🎭 **Animations fluides** avec CSS3
 - 🚀 **Déploiement automatique** avec Vercel
+- 🔥 **Firebase Firestore** pour la synchronisation temps réel (optionnel)
+- 🎁 **Marquage "Acheté"** - Les visiteurs peuvent marquer les cadeaux achetés
+- 📡 **Synchronisation instantanée** - Tous les visiteurs voient les changements en temps réel
 
 ## 📁 Structure du projet
 
@@ -209,6 +212,23 @@ Pour désactiver complètement l'effet neige, retirez cette ligne dans `index.ht
 
 1. Glissez-déposez votre dossier sur [Netlify Drop](https://app.netlify.com/drop)
 2. Ou connectez votre repository GitHub pour des déploiements automatiques
+
+## 🔥 Configuration Firebase (Optionnel)
+
+Pour activer la synchronisation temps réel et le marquage des cadeaux achetés :
+
+1. **Créez un projet Firebase** sur [Firebase Console](https://console.firebase.google.com/)
+2. **Activez Firestore Database**
+3. **Configurez vos credentials** dans `scripts/firebaseConfig.js`
+4. **Initialisez la base** en ouvrant `initFirestore.html` dans votre navigateur
+5. **Déployez les règles** de sécurité depuis `firestore.rules`
+
+📖 **Guide complet** : Consultez [FIREBASE_SETUP.md](./FIREBASE_SETUP.md) pour les instructions détaillées étape par étape.
+
+### Mode de fonctionnement
+
+- **Sans Firebase** : Le site fonctionne normalement avec les produits de `config.json`
+- **Avec Firebase** : Les boutons "Marquer comme acheté" apparaissent et tous les visiteurs voient les changements instantanément
 
 ## 🔧 Personnalisation avancée
 
