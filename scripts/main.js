@@ -215,9 +215,11 @@ function renderProducts() {
 
     noResults.style.display = 'none';
 
-    productsGrid.innerHTML = filteredProducts.map(product => `
+    productsGrid.innerHTML = filteredProducts.map(product => {
+        const priorityClass = product.priority ? product.priority.toLowerCase().replace(/\s+/g, '-') : '';
+        return `
         <article class="product-card">
-            <span class="priority-badge ${product.priority}">${getPriorityLabel(product.priority)}</span>
+            ${product.priority ? `<span class="priority-badge ${priorityClass}">${product.priority}</span>` : ''}
             <div class="product-image">
                 ${product.image
                     ? `<img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'product-image-placeholder\\'>${getCategoryEmoji(product.category)}</div>'">`
@@ -240,19 +242,10 @@ function renderProducts() {
                 </div>
             </div>
         </article>
-    `).join('');
+    `}).join('');
 
     // Trigger animation for new cards
     animateCards();
-}
-
-function getPriorityLabel(priority) {
-    const labels = {
-        'haute': 'Priorité haute',
-        'moyenne': 'Priorité moyenne',
-        'basse': 'Priorité basse'
-    };
-    return labels[priority] || priority;
 }
 
 function getCategoryEmoji(category) {

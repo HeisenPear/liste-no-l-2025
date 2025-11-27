@@ -348,6 +348,11 @@ button {
     color: white;
 }
 
+.priority-badge.cadeaux-commun {
+    background: rgba(239, 68, 68, 0.9);
+    color: white;
+}
+
 /* Product Image */
 .product-image {
     position: relative;

@@ -13,7 +13,7 @@
       "name": "Azzaro Wanted",
       "category": "Parfum",
       "description": "Un parfum élégant et moderne",
-      "price": "65€",
+      "price": "66,99€",
       "priority": "",
       "image": "images/Cadeaux commun/Azzaro Wanted.avif",
       "url": "https://www.nocibe.fr/fr/p/5010533011?variant=481595"
@@ -23,60 +23,70 @@
       "name": "Pantalon Flanelle LePantalon",
       "category": "Mode",
       "description": "Élégance et confort pour l'hiver",
-      "price": "120€",
-      "priority": "",
+      "price": "149€",
+      "priority": "Cadeaux commun",
       "image": "images/Cadeaux commun/Pantalon flanelle LePantalon.webp",
-      "url": "https://www.votre-lien-achat.com/pantalon-flanelle"
+      "url": "https://www.lepantalon.com/products/pantalon-a-pinces-flanelle-vert"
     },
     {
       "id": 3,
       "name": "LEGO Les Tournesols Van Gogh",
       "category": "Déco",
       "description": "Art et créativité en briques LEGO",
-      "price": "180€",
-      "priority": "",
+      "price": "147,34€",
+      "priority": "Cadeaux commun",
       "image": "images/Loisirs/Les tournesols Van Gogh.webp",
-      "url": "https://www.votre-lien-achat.com/lego-tournesols"
+      "url": "https://www.amazon.fr/LEGO-31215-Art/dp/B0DHSF7W4X"
     },
     {
       "id": 4,
       "name": "Prenez votre argent en main",
       "category": "Culture",
       "description": "Par Matthias Baccino - Guide financier pratique",
-      "price": "22€",
+      "price": "18,95€",
       "priority": "",
       "image": "images/Loisirs/Livre Matthias Baccino.jpg",
-      "url": "https://www.votre-lien-achat.com/livre-argent"
+      "url": "https://www.amazon.fr/Prenez-votre-argent-main-lind%C3%A9pendance/dp/2749959624?crid=2TZ5WFGBTKIMR&dib=eyJ2IjoiMSJ9.sOy0cbLx9acijfq2Wf_HKMa5hq5x3vut2hhf7t1dBtwSooNsd6vxvw6KzaGOEWdxPv36kQL9DX57-rl1-oUy_w.nRbSOD84BmBdGuxSBHgbmdIRRZVVMvaHQ4-UA3Sfi7A&dib_tag=se&keywords=matthias+bacccino+livre&qid=1764258904&sprefix=matthias,aps,77&sr=8-1"
     },
     {
       "id": 5,
       "name": "Cardigan Mailles Mango",
       "category": "Mode",
       "description": "Douceur et style pour l'hiver",
-      "price": "60€",
+      "price": "59,99€",
       "priority": "",
       "image": "images/Vêtements/Cardigan mailles mango.avif",
-      "url": "https://www.votre-lien-achat.com/cardigan-mango"
+      "url": "https://shop.mango.com/fr/fr/p/homme/gilets-et-pull-overs/cardigans/cardigan-maille-structuree-fermeture-eclair_27081259?c=32"
     },
     {
       "id": 6,
       "name": "Manteau en Laine",
       "category": "Mode",
       "description": "Élégance intemporelle",
-      "price": "200€",
-      "priority": "",
+      "price": "79,99€",
+      "priority": "Cadeaux commun",
       "image": "images/Vêtements/Manteau en laine.avif",
-      "url": "https://www.votre-lien-achat.com/manteau-laine"
+      "url": "https://shop.mango.com/fr/fr/p/homme/manteaux/manteaux/manteau-laine-melangee-croise_17027886"
     },
     {
       "id": 7,
       "name": "Pull Mango",
       "category": "Mode",
       "description": "Confort et modernité",
-      "price": "45€",
+      "price": "49,99€",
       "priority": "",
       "image": "images/Vêtements/pull mango.avif",
-      "url": "https://www.votre-lien-achat.com/pull-mango"
+      "url": "https://shop.mango.com/fr/fr/p/homme/gilets-et-pull-overs/pulls-overs/pull-over-maille-col-zippe_17007901?c=56"
+    },
+    {
+      "id": 8,
+      "name": "Coffret Rituals Homme",
+      "category": "Parfum",
+      "description": "Coffret cadeau soin et bien-être",
+      "price": "35,90",
+      "priority": "",
+      "image": "images/Coffret rituals homme .webp",
+      "url": "https://www.rituals.com/fr-fr/rituals-homme---medium-gift-set-2025-1120176.html?source=cop&showbacklink=false"
     }
   ]
 }
