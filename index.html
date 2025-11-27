@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ma liste de cadeaux de Noël 2024 - Découvrez mes idées cadeaux">
+    <title>Ma Liste de Noël 2024</title>
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="styles/main.css" as="style">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles/main.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎄</text></svg>">
+</head>
+<body>
+    <!-- Snow effect canvas -->
+    <canvas id="snowCanvas"></canvas>
+
+    <!-- Dark mode toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="header-title" id="siteTitle">Ma Liste de Noël 2024</h1>
+                <p class="header-subtitle" id="siteSubtitle">Quelques idées cadeaux qui me feraient plaisir</p>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="days">0</span>
+                        <span class="countdown-label">jours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="hours">0</span>
+                        <span class="countdown-label">heures</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="minutes">0</span>
+                        <span class="countdown-label">minutes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Filters & Search -->
+            <div class="controls">
+                <div class="search-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Rechercher un produit..." aria-label="Rechercher">
+                </div>
+
+                <div class="filters" id="filters">
+                    <button class="filter-btn active" data-category="all">Tous</button>
+                    <!-- Dynamic filters will be added here -->
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be dynamically loaded here -->
+            </div>
+
+            <!-- No results message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <p>Aucun produit trouvé</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-message" id="footerMessage">Joyeuses fêtes ! 🎄</p>
+            <div class="social-links" id="socialLinks">
+                <!-- Social links will be dynamically added if configured -->
+            </div>
+            <p class="footer-credit">Créé avec ❤️ pour Noël 2024</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts/snow.js" defer></script>
+    <script src="scripts/main.js" defer></script>
+</body>
+</html>

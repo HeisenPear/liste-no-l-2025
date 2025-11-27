@@ -1,0 +1,82 @@
+{
+  "siteTitle": "Ma Liste de Noël 2025",
+  "siteSubtitle": "Quelques idées cadeaux qui me feraient plaisir",
+  "footerMessage": "Joyeuses fêtes ! 🎄",
+  "socialLinks": {
+    "instagram": "",
+    "facebook": "",
+    "twitter": ""
+  },
+  "products": [
+    {
+      "id": 1,
+      "name": "Azzaro Wanted",
+      "category": "Parfum",
+      "description": "Un parfum élégant et moderne",
+      "price": "65€",
+      "priority": "",
+      "image": "images/Cadeaux commun/Azzaro Wanted.avif",
+      "url": "https://www.nocibe.fr/fr/p/5010533011?variant=481595"
+    },
+    {
+      "id": 2,
+      "name": "Pantalon Flanelle LePantalon",
+      "category": "Mode",
+      "description": "Élégance et confort pour l'hiver",
+      "price": "120€",
+      "priority": "",
+      "image": "images/Cadeaux commun/Pantalon flanelle LePantalon.webp",
+      "url": "https://www.votre-lien-achat.com/pantalon-flanelle"
+    },
+    {
+      "id": 3,
+      "name": "LEGO Les Tournesols Van Gogh",
+      "category": "Déco",
+      "description": "Art et créativité en briques LEGO",
+      "price": "180€",
+      "priority": "",
+      "image": "images/Loisirs/Les tournesols Van Gogh.webp",
+      "url": "https://www.votre-lien-achat.com/lego-tournesols"
+    },
+    {
+      "id": 4,
+      "name": "Prenez votre argent en main",
+      "category": "Culture",
+      "description": "Par Matthias Baccino - Guide financier pratique",
+      "price": "22€",
+      "priority": "",
+      "image": "images/Loisirs/Livre Matthias Baccino.jpg",
+      "url": "https://www.votre-lien-achat.com/livre-argent"
+    },
+    {
+      "id": 5,
+      "name": "Cardigan Mailles Mango",
+      "category": "Mode",
+      "description": "Douceur et style pour l'hiver",
+      "price": "60€",
+      "priority": "",
+      "image": "images/Vêtements/Cardigan mailles mango.avif",
+      "url": "https://www.votre-lien-achat.com/cardigan-mango"
+    },
+    {
+      "id": 6,
+      "name": "Manteau en Laine",
+      "category": "Mode",
+      "description": "Élégance intemporelle",
+      "price": "200€",
+      "priority": "",
+      "image": "images/Vêtements/Manteau en laine.avif",
+      "url": "https://www.votre-lien-achat.com/manteau-laine"
+    },
+    {
+      "id": 7,
+      "name": "Pull Mango",
+      "category": "Mode",
+      "description": "Confort et modernité",
+      "price": "45€",
+      "priority": "",
+      "image": "images/Vêtements/pull mango.avif",
+      "url": "https://www.votre-lien-achat.com/pull-mango"
+    }
+  ]
+}
