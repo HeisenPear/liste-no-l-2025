@@ -9,7 +9,6 @@ import {
     doc,
     onSnapshot,
     updateDoc,
-    serverTimestamp,
     query,
     orderBy
 } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
@@ -59,7 +58,7 @@ export async function markProductAsPurchased(productId) {
 
         await updateDoc(productRef, {
             purchased: true,
-            purchasedAt: serverTimestamp()
+            purchasedAt: new Date().toISOString()
         });
 
         console.log(`✅ Produit ${productId} marqué comme acheté`);

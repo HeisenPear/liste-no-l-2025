@@ -1,0 +1,160 @@
+/**
+ * Purchased States Styles
+ * Styles pour les états "acheté" des produits
+ */
+
+/* ===================================
+   Purchased Badge
+   =================================== */
+.purchased-badge {
+    position: absolute;
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
+    right: var(--spacing-sm);
+    padding: 0.75rem 1rem;
+    background: rgba(220, 38, 38, 0.95);
+    color: white;
+    border-radius: var(--radius-lg);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: fadeIn 0.3s ease-in;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+}
+
+/* ===================================
+   Product Card - Purchased State
+   =================================== */
+.product-card.purchased {
+    opacity: 0.7;
+    transition: all 0.5s ease-out;
+}
+
+.product-card.purchased:hover {
+    opacity: 0.85;
+}
+
+.product-card.purchased .product-image img {
+    filter: grayscale(60%) brightness(0.8);
+    opacity: 0.6;
+}
+
+.product-card.purchased .product-price {
+    text-decoration: line-through;
+    opacity: 0.6;
+    color: var(--color-text-secondary);
+}
+
+/* ===================================
+   Product Actions
+   =================================== */
+.product-actions {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-border);
+}
+
+/* ===================================
+   Mark Purchased Button
+   =================================== */
+.mark-purchased-btn {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background: var(--color-accent);
+    color: var(--color-bg);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all var(--transition-base);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.mark-purchased-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.mark-purchased-btn:hover:not(:disabled) {
+    background: var(--color-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(212, 121, 143, 0.3);
+}
+
+.mark-purchased-btn:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.mark-purchased-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ===================================
+   Unmark Purchased Button
+   =================================== */
+.unmark-purchased-btn {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    font-size: 0.8125rem;
+    transition: all var(--transition-base);
+}
+
+.unmark-purchased-btn:hover:not(:disabled) {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border-color: var(--color-text-secondary);
+}
+
+.unmark-purchased-btn:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.unmark-purchased-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ===================================
+   Animations
+   =================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================================
+   Responsive Adjustments
+   =================================== */
+@media (max-width: 767px) {
+    .mark-purchased-btn {
+        font-size: 0.8125rem;
+        padding: 0.625rem 1.25rem;
+    }
+
+    .purchased-badge {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.75rem;
+    }
+}

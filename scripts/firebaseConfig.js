@@ -7,15 +7,15 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
 // Configuration Firebase
-// ⚠️ IMPORTANT : Remplacez ces valeurs par celles de votre projet Firebase
 // Ces clés sont publiques et sécurisées côté Firestore avec des règles
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyByYQB3MC9CSMWo7r0ATEGEOh11BamXtLU",
+  authDomain: "liste-noel-2025-4557a.firebaseapp.com",
+  projectId: "liste-noel-2025-4557a",
+  storageBucket: "liste-noel-2025-4557a.firebasestorage.app",
+  messagingSenderId: "655870224696",
+  appId: "1:655870224696:web:8e0e0a9eddb3b40084f9cd",
+  measurementId: "G-3WRNTB6RBN"
 };
 
 // Initialisation de Firebase
