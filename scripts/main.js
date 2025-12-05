@@ -20,6 +20,8 @@ let unsubscribeFirestore = null;
 // DOM Elements
 // ===================================
 const productsGrid = document.getElementById('productsGrid');
+const cadeauxCopineGrid = document.getElementById('cadeauxCopineGrid');
+const cadeauxCopineSection = document.getElementById('cadeauxCopineSection');
 const searchInput = document.getElementById('searchInput');
 const filtersContainer = document.getElementById('filters');
 const noResults = document.getElementById('noResults');
@@ -244,23 +246,61 @@ function applyFilters() {
 // Render Products
 // ===================================
 function renderProducts() {
-    if (filteredProducts.length === 0) {
+    // Separate products by priority
+    const cadeauxCopine = filteredProducts.filter(p => p.priority === 'Cadeaux copine');
+    const regularProducts = filteredProducts.filter(p => p.priority !== 'Cadeaux copine');
+
+    // Check if we have any products to display
+    const hasProducts = cadeauxCopine.length > 0 || regularProducts.length > 0;
+
+    if (!hasProducts) {
         productsGrid.innerHTML = '';
+        cadeauxCopineGrid.innerHTML = '';
+        cadeauxCopineSection.style.display = 'none';
         noResults.style.display = 'block';
         return;
     }
 
     noResults.style.display = 'none';
 
-    productsGrid.innerHTML = filteredProducts.map(product => {
-        const priorityClass = product.priority ? product.priority.toLowerCase().replace(/\s+/g, '-') : '';
-        const isPurchased = product.purchased || false;
+    // Render Regular Products (all products except cadeaux copine)
+    if (regularProducts.length > 0) {
+        productsGrid.innerHTML = regularProducts.map(product => createProductCard(product)).join('');
+    } else {
+        productsGrid.innerHTML = '';
+    }
 
-        return `
+    // Render Cadeaux Copine Section (below regular products)
+    if (cadeauxCopine.length > 0) {
+        cadeauxCopineSection.style.display = 'block';
+        cadeauxCopineGrid.innerHTML = cadeauxCopine.map(product => createProductCard(product)).join('');
+    } else {
+        cadeauxCopineSection.style.display = 'none';
+    }
+
+    // Add event listeners for purchase buttons
+    if (useFirebase) {
+        attachPurchaseListeners();
+    }
+
+    // Trigger animation for new cards
+    animateCards();
+}
+
+/**
+ * Create a product card HTML
+ */
+function createProductCard(product) {
+    const priorityClass = product.priority ? product.priority.toLowerCase().replace(/\s+/g, '-') : '';
+    const isPurchased = product.purchased || false;
+
+    return `
         <article class="product-card ${isPurchased ? 'purchased' : ''}" data-product-id="${product.id}">
             ${isPurchased
                 ? '<div class="purchased-badge">🎁 DÉJÀ ACHETÉ</div>'
-                : (product.priority ? `<span class="priority-badge ${priorityClass}">${product.priority}</span>` : '')
+                : (product.priority && product.priority !== 'Cadeaux copine'
+                    ? `<span class="priority-badge ${priorityClass}">${product.priority}</span>`
+                    : '')
             }
             <div class="product-image">
                 ${product.image
@@ -292,15 +332,7 @@ function renderProducts() {
                 ` : ''}
             </div>
         </article>
-    `}).join('');
-
-    // Add event listeners for purchase buttons
-    if (useFirebase) {
-        attachPurchaseListeners();
-    }
-
-    // Trigger animation for new cards
-    animateCards();
+    `;
 }
 
 /**

@@ -274,6 +274,72 @@ button {
 }
 
 /* ===================================
+   Special Sections (Cadeaux Communs & Copine)
+   =================================== */
+.special-sections {
+    margin-bottom: var(--spacing-xl);
+}
+
+.special-section {
+    margin-bottom: var(--spacing-2xl);
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, rgba(212, 121, 143, 0.1) 0%, rgba(95, 163, 119, 0.1) 100%);
+    border-radius: var(--radius-xl);
+    border: 2px solid rgba(212, 121, 143, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.special-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(212, 121, 143, 0.1) 0%, transparent 70%);
+    animation: pulse 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+    text-shadow: 0 2px 10px rgba(212, 121, 143, 0.3);
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    font-weight: 400;
+}
+
+.regular-section .section-header {
+    margin-bottom: var(--spacing-lg);
+    margin-top: var(--spacing-2xl);
+}
+
+.regular-section .section-title {
+    font-size: 1.75rem;
+    text-align: center;
+}
+
+/* ===================================
    Products Grid
    =================================== */
 .products-grid {
@@ -281,6 +347,8 @@ button {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: var(--spacing-lg);
     margin-bottom: var(--spacing-2xl);
+    position: relative;
+    z-index: 1;
 }
 
 @media (min-width: 640px) {
