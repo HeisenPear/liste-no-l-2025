@@ -97,6 +97,16 @@
     "priority": "Cadeaux copine",
     "image": "https://boulanger.scene7.com/is/image/Boulanger/3701335309949_h_f_l_0?wid=2032&hei=2032&resMode=sharp2&op_usm=1.75,0.3,2,0&fmt=png-alpha",
     "url": "https://www.boulanger.com/ref/1223321"
+    },
+    {
+    "id": 10,
+    "name": "Housse de couette en coton 240x220 cm",
+    "category": "Maison",
+    "description": "Le linge (très) cosy de la saison",
+    "price": "28,19€",
+    "priority": "Cadeaux copine",
+    "image": "https://cdn.laredoute.com/cdn-cgi/image/width=1200,height=1200,fit=pad,dpr=1/products/2/6/0/260946cd5f2cb03c4475290a9970bd73.jpg",
+    "url": "https://www.laredoute.fr/ppdp/prod-528975818.aspx"
     }
   ]
 }
